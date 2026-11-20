@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Jelas — a clear reading companion. Paste any hard document and get a plain-language version, powered by Firebase AI Logic hybrid inference."
+    />
+    <title>Jelas — Clear Reading Companion</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-brand">
+          <div class="logo" aria-hidden="true">J</div>
+          <div>
+            <h1>Jelas</h1>
+            <p class="tagline">Hard documents, in plain words.</p>
+          </div>
+        </div>
+        <p class="hero-copy">
+          Medicine labels, school letters, bank notices — the documents that
+          matter most are often the hardest to read. Paste one below and Jelas
+          rewrites it in plain language. Quick rewrites run
+          <strong>on your device</strong> whenever possible, so sensitive text
+          never has to leave your browser.
+        </p>
+        <div id="config-banner" class="banner banner-warn" hidden>
+          <strong>Demo mode.</strong>
+          <span id="config-banner-text">
+            Firebase is not configured yet, so live AI and the Library are
+            paused. The interface is fully explorable — add your Firebase
+            config in <code>src/firebase-config.ts</code> to switch everything
+            on.
+          </span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="column column-main">
+          <div class="card">
+            <div class="card-head">
+              <h2>Your document</h2>
+              <span id="char-count" class="muted">0 characters</span>
+            </div>
+            <div class="samples" role="group" aria-label="Sample documents">
+              <span class="samples-label">Try a sample:</span>
+              <button type="button" class="chip" data-sample="medicine">
+                Medicine label
+              </button>
+              <button type="button" class="chip" data-sample="school">
+                School letter
+              </button>
+              <button type="button" class="chip" data-sample="bank">
+                Bank notice
+              </button>
+            </div>
+            <textarea
+              id="doc-input"
+              rows="10"
+              placeholder="Paste a medicine label, a letter from school, a bank notice, a contract clause…"
+              aria-label="Document text"
+            ></textarea>
+            <div class="actions">
+              <button type="button" id="btn-simplify" class="btn btn-primary">
+                Simplify
+              </button>
+              <button type="button" id="btn-explain" class="btn">
+                Explain deeply
+              </button>
+              <button type="button" id="btn-checklist" class="btn">
+                Action checklist
+              </button>
+              <button type="button" id="btn-save" class="btn btn-ghost">
+                Save to Library
+              </button>
+            </div>
+            <p id="action-status" class="status" role="status"></p>
+          </div>
+
+          <div id="results" class="results" aria-live="polite"></div>
+
+          <div class="card chat-card">
+            <div class="card-head">
+              <h2>Ask about this document</h2>
+              <span class="route-tag route-cloud">Cloud</span>
+            </div>
+            <div id="chat-log" class="chat-log">
+              <p class="muted chat-empty">
+                Ask a follow-up question — “What happens if I miss the
+                deadline?”, “How much do I need to pay?” — and Jelas answers
+                from the document above.
+              </p>
+            </div>
+            <form id="chat-form" class="chat-form">
+              <input
+                id="chat-input"
+                type="text"
+                placeholder="Ask a question about the document…"
+                aria-label="Your question"
+                autocomplete="off"
+              />
+              <button type="submit" class="btn btn-primary">Ask</button>
+            </form>
+          </div>
+        </section>
+
+        <aside class="column column-side">
+          <div class="card router-card">
+            <div class="card-head">
+              <h2>Inference Router</h2>
+              <span class="router-dot" id="router-dot" title="Router status"></span>
+            </div>
+            <dl class="router-stats">
+              <div>
+                <dt>On-device model</dt>
+                <dd id="device-status">Checking…</dd>
+              </div>
+              <div>
+                <dt>Cloud model</dt>
+                <dd id="cloud-status">Checking…</dd>
+              </div>
+              <div>
+                <dt>Requests this session</dt>
+                <dd id="request-count">0</dd>
+              </div>
+              <div>
+                <dt>Last route</dt>
+                <dd id="last-route">—</dd>
+              </div>
+            </dl>
+            <fieldset class="mode-toggle">
+              <legend>Routing mode</legend>
+              <label>
+                <input type="radio" name="mode" value="auto" checked />
+                Auto
+              </label>
+              <label>
+                <input type="radio" name="mode" value="device" />
+                Device only
+              </label>
+              <label>
+                <input type="radio" name="mode" value="cloud" />
+                Cloud
+              </label>
+            </fieldset>
+            <p class="muted router-note">
+              In <strong>Auto</strong>, quick tasks prefer Gemini Nano on your
+              device (private, instant, works offline). Deep explanations,
+              questions and checklists use the cloud model.
+            </p>
+            <ul id="route-log" class="route-log"></ul>
+          </div>
+
+          <div class="card library-card">
+            <div class="card-head">
+              <h2>Library</h2>
+              <span id="library-status" class="muted">…</span>
+            </div>
+            <p class="muted">
+              Your saved simplifications, stored privately in Firestore under
+              an anonymous account.
+            </p>
+            <ul id="library-list" class="library-list"></ul>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <p>
+          Jelas is built with Firebase AI Logic hybrid inference, Firestore,
+          Anonymous Auth, App Check and Remote Config. Simplification is an
+          aid to understanding — always follow the original document and
+          professional advice for medical, legal or financial decisions.
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
