@@ -15,19 +15,19 @@
 import type { FirebaseOptions } from "firebase/app";
 
 export const firebaseConfig: FirebaseOptions = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME",
+  apiKey: "AIzaSyDWhXi3-KCL8bA1KBM7KqrMYATy4G7Y8YA",
+  authDomain: "jelas-hybrid-ai.firebaseapp.com",
+  projectId: "jelas-hybrid-ai",
+  storageBucket: "jelas-hybrid-ai.firebasestorage.app",
+  messagingSenderId: "328163563317",
+  appId: "1:328163563317:web:55599a2f36932b3448de7c",
 };
 
 /**
  * reCAPTCHA v3 site key used by App Check. Create it in the Firebase
  * Console (App Check → Apps → Web) and paste it here.
  */
-export const appCheckSiteKey = "REPLACE_ME";
+export const appCheckSiteKey: string = "6LcSkCkuAAAAAIVT9BPDtR7gaTyczwqHdufmdWR-";
 
 /** True only when every placeholder above has been replaced. */
 export const isConfigured: boolean =

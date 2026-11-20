@@ -16,7 +16,7 @@
 import { initializeApp, type FirebaseApp } from "firebase/app";
 import {
   initializeAppCheck,
-  ReCaptchaV3Provider,
+  ReCaptchaEnterpriseProvider,
   type AppCheck,
 } from "firebase/app-check";
 import { getAuth, type Auth } from "firebase/auth";
@@ -59,7 +59,7 @@ function initServices(): FirebaseServices | null {
   // App Check with debug-token support for local development.
   // In dev builds we opt into the debug provider flow: register the printed
   // debug token in the Firebase Console (App Check → Apps → Manage debug
-  // tokens). In production the reCAPTCHA v3 provider is used.
+  // tokens). In production the Fraud Defense (reCAPTCHA Enterprise) provider is used.
   let appCheck: AppCheck | null = null;
   try {
     if (import.meta.env.DEV) {
@@ -68,7 +68,7 @@ function initServices(): FirebaseServices | null {
       ] = true;
     }
     appCheck = initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(appCheckSiteKey),
+      provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey),
       isTokenAutoRefreshEnabled: true,
     });
   } catch (err) {
